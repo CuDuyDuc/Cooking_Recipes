@@ -30,10 +30,10 @@ const TabNavigator = () => {
                   case 'Tìm Kiếm':
                       icon = <SearchNormal1 size={size} color={color} variant="Bold" />
                       break;
-                  case 'Thông Báo':
+                  case 'Yêu Thích':
                       icon = <Heart size={size} color={color} variant="Bold" />
                       break;
-                  case 'Giỏ Hàng':
+                  case 'Profile':
                       icon = <User size={size} color={color} variant="Bold" />
                       break;
   

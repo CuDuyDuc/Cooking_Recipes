@@ -20,6 +20,7 @@ GoogleSignin.configure({
 });
 
 Settings.setAppID('1033338435101331');
+
 const LoginScreen = ({navigation}: any) => {
 
     const [email, setEmail] = useState('');
