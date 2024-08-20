@@ -4,6 +4,9 @@ import LoginScreen from './auth/LoginScreen';
 import SignUpScreen from './auth/SignUpScreen';
 import ForgotPassWord from './auth/ForgotPassWord';
 import Verification from './auth/Verification';
+import ProFileScreen from './profile/ProfileScreen';
+import SearchScreen from './search/SearchScreen';
+import FavouriteScreen from './favourite/FavouriteScreen';
 export {
     SplashScreen,
     LoginScreen,
@@ -11,4 +14,7 @@ export {
     ForgotPassWord,
     Verification,
     HomeScreen,
+    ProFileScreen,
+    SearchScreen,
+    FavouriteScreen,
 }

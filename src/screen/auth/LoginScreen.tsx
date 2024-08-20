@@ -1,14 +1,25 @@
 import { Lock, Sms } from 'iconsax-react-native';
 import React, { useEffect, useState } from 'react';
-import { Switch } from 'react-native';
+import { Alert, Switch } from 'react-native';
 import { FONTFAMILY } from '../../../assets/fonts';
 import COLORS from '../../assets/colors/Colors';
 import { Facebook, Google } from '../../assets/svgs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ButtonComponent, InputComponent, KeyboardAvoidingViewWrapper, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components';
 import { LoadingModal } from '../../modal';
 import { globalStyle } from '../../styles/globalStyle';
 import { Validate } from '../../utils/validate';
+import authenticationAPI from '../../apis/authAPI';
+import { useDispatch } from 'react-redux';
+import { addAuth } from '../../redux/reducers/authReducer';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { Settings, LoginManager, Profile } from 'react-native-fbsdk-next';
 
+GoogleSignin.configure({
+    webClientId: '18311887095-5nk1acdqhg8qp5nqdgcoqq84s7rce8ra.apps.googleusercontent.com',
+});
+
+Settings.setAppID('1033338435101331');
 const LoginScreen = ({navigation}: any) => {
 
     const [email, setEmail] = useState('');
@@ -16,6 +27,7 @@ const LoginScreen = ({navigation}: any) => {
     const [isRemember, setIsRemember] = useState(true);
     const [isDisable, setIsDisable] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const emailValidation = Validate.email(email);
@@ -26,6 +38,89 @@ const LoginScreen = ({navigation}: any) => {
             setIsDisable(false);
         }
     }, [email, password]);
+
+    const handleLogin = async () => {
+
+        const emailValidation = Validate.email(email);
+        setIsLoading(true);
+        if (emailValidation) {
+            setIsLoading(true);
+            try {
+                const res = await authenticationAPI.HandleAuthentication('/login', { email, password }, 'post');
+                dispatch(addAuth(res.data));
+                await AsyncStorage.setItem('auth', isRemember ? JSON.stringify(res.data) : email);
+            } catch (error) {
+                console.log(error)
+            }
+
+        } else {
+            Alert.alert('Email is not correct!!!');
+        }
+    }
+
+    const handleLoginWithGoogle = async () => {
+        await GoogleSignin.hasPlayServices({
+            showPlayServicesUpdateDialog: true, // hiển thị dialog chọn gg đăng nhập
+        });
+
+        const api = '/signInWithGoogle';
+        setIsLoading(true);
+        try {
+            await GoogleSignin.hasPlayServices();
+
+            const userInfo = await GoogleSignin.signIn(); // gọi đến đăng nhập
+            const user = userInfo.user
+            const res: any = await authenticationAPI.HandleAuthentication(api, user, 'post')
+            // console.log(res);
+            dispatch(addAuth(res.data));
+            await AsyncStorage.setItem(
+                'auth',
+                JSON.stringify(res.data),
+            );
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleLoginWithFacebook = async () => {
+        const api = '/signInWithGoogle';
+        try {
+            const result = await LoginManager.logInWithPermissions([
+                'public_profile',
+            ]);
+
+            if (result.isCancelled) {
+                console.log('Login cancel');
+            } else {
+                const profile = await Profile.getCurrentProfile();
+
+                if (profile) {
+                    setIsLoading(true);
+                    const data = {
+                        name: profile.name,
+                        givenName: profile.firstName,
+                        familyName: profile.lastName,
+                        email: profile.userID, 
+                        photo: profile.imageURL,
+                    };
+
+                    const res: any = await authenticationAPI.HandleAuthentication(
+                        api,
+                        data,
+                        'post',
+                    );
+
+                    dispatch(addAuth(res.data));
+
+                    await AsyncStorage.setItem('auth', JSON.stringify(res.data));
+
+                    setIsLoading(false);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <KeyboardAvoidingViewWrapper>
@@ -88,7 +183,7 @@ const LoginScreen = ({navigation}: any) => {
                     disable={isDisable}
                     text='ĐĂNG NHẬP'
                     type='#129575'
-                    // onPress={handleLogin}
+                    onPress={handleLogin}
                 />
             </SectionComponent>
             <SectionComponent>
@@ -108,14 +203,14 @@ const LoginScreen = ({navigation}: any) => {
                         type='#129575'
                         styles={[globalStyle.shadow, {flex: 0.1, marginRight: 20}]}
                         textColor={COLORS.HEX_LIGHT_GREY}
-                        // onPress={handleLoginWithGoogle}
+                        onPress={handleLoginWithGoogle}
                         icon={<Google  style = {{marginLeft: 13}}/>}
                     />
                     <ButtonComponent
                         text=''
                         iconFlex='left'
                         type='#129575'
-                        // onPress={handleLoginWithFacebook}
+                        onPress={handleLoginWithFacebook}
                         styles={[globalStyle.shadow, {flex: 0.1}]}
                         textColor={COLORS.HEX_LIGHT_GREY}
                         icon={<Facebook style = {{marginLeft: 13}}/>} />

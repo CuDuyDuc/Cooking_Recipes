@@ -5,6 +5,7 @@ import COLORS from '../../assets/colors/Colors';
 import { ButtonComponent, InputComponent, KeyboardAvoidingViewWrapper, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components';
 import { LoadingModal } from '../../modal';
 import { Validate } from '../../utils/validate';
+import authenticationAPI from '../../apis/authAPI';
 
 
 const initValues = {
@@ -82,6 +83,27 @@ const SignUpScreen = ({ navigation }: any) => {
         setErrorMessage(data);
     };
 
+    const handleRegister = async () => {
+        const api = `/verification`;
+        setIsLoading(true);
+        try {
+            const res = await authenticationAPI.HandleAuthentication(
+                api,
+                { email: values.email },
+                'post',
+            );
+
+            setIsLoading(false);
+
+            navigation.navigate('Verification', {
+                code: res.data.code,
+                ...values,
+            });
+        } catch (error) {
+            console.log(error);
+            setIsLoading(false);
+        }
+    };
 
     return (
         <>
@@ -138,7 +160,7 @@ const SignUpScreen = ({ navigation }: any) => {
                         onEnd={() => formValidator('password')} />
                     <TextComponent
                         text='Xác nhận mật khẩu'
-                        styles={{ fontFamily: FONTFAMILY.montserrat_bold}}
+                        styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                         color={COLORS.BLACK} />
                     <SpaceComponent height={5} />
                     <InputComponent
@@ -167,7 +189,7 @@ const SignUpScreen = ({ navigation }: any) => {
                     <ButtonComponent
                         text='ĐĂNG KÝ'
                         type='#129575'
-                        // onPress={handleRegister}
+                        onPress={handleRegister}
                         disable={isDisable} />
                 </SectionComponent>
                 <SectionComponent>

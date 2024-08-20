@@ -1,6 +1,6 @@
 import { ArrowLeft, Sms } from 'iconsax-react-native';
 import React, { useState } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, TouchableOpacity, View } from 'react-native';
 import COLORS from '../../assets/colors/Colors';
 import { ButtonComponent, InputComponent, SectionComponent, TextComponent } from '../../components';
 import { LoadingModal } from '../../modal';
@@ -8,6 +8,7 @@ import { globalStyle } from '../../styles/globalStyle';
 import { Validate } from '../../utils/validate';
 import { FONTFAMILY } from '../../../assets/fonts';
 import IMAGES from '../../assets/images/Images';
+import authenticationAPI from '../../apis/authAPI';
 
 const ForgotPassWord = ({ navigation }: any) => {
 
@@ -18,6 +19,20 @@ const ForgotPassWord = ({ navigation }: any) => {
     const handleCheckEmail = () => {
         const isValidEmail = Validate.email(email);
         setIsDisable(!isValidEmail);
+    }
+
+    const handleForgotPassword = async () => {
+        const api = `/forgotPassword`;
+        setIsLoading(true);
+        try {
+            const res: any = await authenticationAPI.HandleAuthentication(api, {email}, 'post');
+            console.log(res);
+            Alert.alert('Gửi Mật Khẩu Cho Bạn: ','Chúng tôi đã gửi đến email của bạn bao gồm mật khẩu mới!');
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            console.log(`Không thể tạo mật khẩu mới api quên mật khẩu, ${error}`);
+        }
     }
 
     return (
@@ -45,7 +60,7 @@ const ForgotPassWord = ({ navigation }: any) => {
                     type='#129575'
                     styles={{ width: '80%' }}
                     disable={isDisable}
-                    // onPress={handleForgotPassword} 
+                    onPress={handleForgotPassword} 
                     />
             </SectionComponent>
             <LoadingModal visible={isLoading} />
