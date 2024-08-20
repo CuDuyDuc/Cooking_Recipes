@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from 'react';
 import { KeyboardType, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import COLORS from '../assets/colors/Colors';
 import { globalStyle } from '../styles/globalStyle';
+import  FontAwesome  from 'react-native-vector-icons/FontAwesome';
 
 
 interface Props {
@@ -38,11 +38,11 @@ const InputComponent = (props: Props) => {
                 autoCapitalize='none'
                 onEndEditing={onEnd}/>
             {suffix ?? suffix}
-            <TouchableOpacity onPress={isPassword ? () => setIsShowPass(!isPassword) : () => onChange('')}>
-                {isPassword ? (<FontAwesome name={isShowPass ? 'eye-slash' : 'eye'} size={22} color={COLORS.HEX_LIGHT_GRAY} /> 
+            <TouchableOpacity onPress={isPassword ? () => setIsShowPass(!isShowPass) : () => onChange('')}>
+                {isPassword ? (<FontAwesome name={isShowPass ? 'eye-slash' : 'eye'} size={22} color={COLORS.HEX_LIGHT_GRAY} />
                 ) : (
                     value.length > 0 && allowClear &&
-                    (<AntDesign name='close' size={22} color={COLORS.HEX_LIGHT_GRAY}/>)
+                    (<AntDesign name='close' size={22} color={COLORS.HEX_LIGHT_GRAY} />)
                 )}
             </TouchableOpacity>
         </View>
