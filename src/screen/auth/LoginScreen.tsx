@@ -1,13 +1,13 @@
 import { Lock, Sms } from 'iconsax-react-native';
 import React, { useEffect, useState } from 'react';
+import { Switch } from 'react-native';
 import { FONTFAMILY } from '../../../assets/fonts';
 import COLORS from '../../assets/colors/Colors';
-import { ButtonComponent, InputComponent, KeyboardAvoidingViewWrapper, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components';
-import { Validate } from '../../utils/validate';
-import { Button, Image, Switch, TouchableOpacity } from 'react-native';
-import { globalStyle } from '../../styles/globalStyle';
 import { Facebook, Google } from '../../assets/svgs';
+import { ButtonComponent, InputComponent, KeyboardAvoidingViewWrapper, RowComponent, SectionComponent, SpaceComponent, TextComponent } from '../../components';
 import { LoadingModal } from '../../modal';
+import { globalStyle } from '../../styles/globalStyle';
+import { Validate } from '../../utils/validate';
 
 const LoginScreen = ({navigation}: any) => {
 
@@ -34,7 +34,7 @@ const LoginScreen = ({navigation}: any) => {
                 <TextComponent
                     text='Đăng Nhập'
                     styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
-                    color={COLORS.BLACK}
+                    color={COLORS.TEAL_GREEN}
                     size={45} />
                 <TextComponent
                     text='Welcome Back'
@@ -46,8 +46,9 @@ const LoginScreen = ({navigation}: any) => {
             <SectionComponent>
                 <TextComponent
                     text='Email'
-                    styles={{ fontFamily: FONTFAMILY.montserrat_regular }}
+                    styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                     color={COLORS.BLACK} />
+                <SpaceComponent height={5}/>
                 <InputComponent
                     value={email}
                     placeholder='Email'
@@ -55,9 +56,10 @@ const LoginScreen = ({navigation}: any) => {
                     allowClear
                     affix={<Sms size={22} color={COLORS.HEX_LIGHT_GREY} />} />
                 <TextComponent
-                    text='Password'
-                    styles={{ fontFamily: FONTFAMILY.montserrat_regular }}
+                    text='Mật khẩu'
+                    styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                     color={COLORS.BLACK} />
+                <SpaceComponent height={5}/>
                 <InputComponent
                     value={password}
                     placeholder='Mật khẩu'
@@ -99,24 +101,24 @@ const LoginScreen = ({navigation}: any) => {
                         fontFamily: FONTFAMILY.montserrat_medium,
                         marginBottom: 30
                     }} />
-                <RowComponent>
+                <RowComponent justify='center'>
                     <ButtonComponent
-                        text='Google'
+                        text=''
                         iconFlex='left'
                         type='#129575'
-                        styles={globalStyle.shadow}
+                        styles={[globalStyle.shadow, {flex: 0.1, marginRight: 20}]}
                         textColor={COLORS.HEX_LIGHT_GREY}
                         // onPress={handleLoginWithGoogle}
-                        icon={<Google />}
+                        icon={<Google  style = {{marginLeft: 13}}/>}
                     />
                     <ButtonComponent
-                        text='Facebook'
+                        text=''
                         iconFlex='left'
                         type='#129575'
                         // onPress={handleLoginWithFacebook}
-                        styles={globalStyle.shadow}
+                        styles={[globalStyle.shadow, {flex: 0.1}]}
                         textColor={COLORS.HEX_LIGHT_GREY}
-                        icon={<Facebook />} />
+                        icon={<Facebook style = {{marginLeft: 13}}/>} />
                 </RowComponent>
             </SectionComponent>
             <SectionComponent>

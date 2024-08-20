@@ -4,15 +4,16 @@ import COLORS from '../assets/colors/Colors';
 import { globalStyle } from '../styles/globalStyle';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { CloseCircle, CloseSquare, Eye, EyeSlash } from 'iconsax-react-native';
 
 
 interface Props {
     value: string,
     onChange: (val: string) => void,
-    affix?: ReactNode, 
-    placeholder?: string, 
-    suffix?: ReactNode, 
-    isPassword?: boolean, 
+    affix?: ReactNode,
+    placeholder?: string,
+    suffix?: ReactNode,
+    isPassword?: boolean,
     allowClear?: boolean,
     type?: KeyboardType,
     onEnd?: () => void,
@@ -21,28 +22,34 @@ interface Props {
 
 const InputComponent = (props: Props) => {
 
-    const { value, onChange, affix, placeholder, suffix, isPassword, allowClear, type, onEnd, backgroundColor} = props;
+    const { value, onChange, affix, placeholder, suffix, isPassword, allowClear, type, onEnd, backgroundColor } = props;
 
     const [isShowPass, setIsShowPass] = useState(isPassword ?? false); // nếu có thì hiển thị không thì là false
     return (
-        <View style = {[styles.inputContainer, { backgroundColor: backgroundColor ?? 'transparent' }]}>
+        <View style={[styles.inputContainer, { backgroundColor: backgroundColor ?? 'transparent' }]}>
             {affix ?? affix}
             <TextInput
-                style = {[styles.input, globalStyle.text]}
+                style={[styles.input, globalStyle.text]}
                 value={value}
                 placeholder={placeholder ?? ''}
-                onChangeText={val => onChange(val)} 
+                onChangeText={val => onChange(val)}
                 secureTextEntry={isShowPass}
                 placeholderTextColor={COLORS.HEX_LIGHT_GREY}
                 keyboardType={type ?? 'default'}
                 autoCapitalize="none"
-                onEndEditing={onEnd}/> 
+                onEndEditing={onEnd} />
             {suffix ?? suffix}
             <TouchableOpacity onPress={isPassword ? () => setIsShowPass(!isShowPass) : () => onChange('')}>
-                {isPassword ? (<FontAwesome name={isShowPass ? 'eye-slash' : 'eye'} size={22} color={COLORS.HEX_LIGHT_GRAY} />
+                {isPassword ? (
+                    isShowPass ? (
+                        <EyeSlash size={22} color={COLORS.HEX_LIGHT_GREY} />
+                    ) : (
+                        <Eye size={22} color={COLORS.HEX_LIGHT_GREY} />
+                    )
                 ) : (
-                    value.length > 0 && allowClear &&
-                    (<AntDesign name='CloseOutlined' size={22} color={COLORS.HEX_LIGHT_GRAY} />)
+                    value.length > 0 && allowClear && (
+                        <CloseSquare size={22} color={COLORS.HEX_LIGHT_GREY} />
+                    )
                 )}
             </TouchableOpacity>
         </View>
