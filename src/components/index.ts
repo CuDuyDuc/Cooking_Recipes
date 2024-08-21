@@ -6,6 +6,7 @@ import RowComponent from './RowComponent';
 import SectionComponent from './SectionComponent';
 import SpaceComponent from './SpaceComponent';
 import TextComponent from './TextComponent';
+import CategoriesList from './CategoriesList ';
 export {
     ButtonComponent,
     ContainerComponent,
@@ -15,4 +16,5 @@ export {
     SectionComponent,
     SpaceComponent,
     TextComponent,
+    CategoriesList,
 }
