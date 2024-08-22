@@ -1,31 +1,54 @@
-import { View, Text, Image, StyleSheet, Platform, StatusBar, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, Platform, StatusBar, TouchableOpacity, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { authSelector } from '../../redux/reducers/authReducer'
-import { CategoriesList, ContainerComponent, RowComponent, SectionComponent, TextComponent } from '../../components'
+import { CardComponent, CategoriesList, ContainerComponent, RowComponent, SectionComponent, TextComponent } from '../../components'
 import COLORS from '../../assets/colors/Colors'
 import { SearchNormal1 } from 'iconsax-react-native'
 import { FONTFAMILY } from '../../../assets/fonts'
 import IMAGES from '../../assets/images/Images'
 import getThirdPartyAPI from '../../apis/getThirdPartyAPI'
 
-const HomeScreen = ({ navigation, route }: any) => {
+const HomeScreen = ({ navigation }: any) => {
 
     const user = useSelector(authSelector);
-    const [categories,setCategories]= useState<any>([])
+    const [categories, setCategories] = useState<any>([]);
+    const [nameCategories, setNameCategories] = useState<string>('');
+    const [cookingRecipes, setCookingRecipes] = useState<any>([]);
 
-    useEffect(()=>{
-        const getCategories= async()=>{
+    useEffect(() => {
+        const getCategories = async () => {
             try {
-                const response= await getThirdPartyAPI.HandleGetThirdPartyAPI('https://www.themealdb.com/api/json/v1/1/categories.php')
-                setCategories(response)  
+                const response = await getThirdPartyAPI.HandleGetThirdPartyAPI('https://www.themealdb.com/api/json/v1/1/categories.php')
+                setCategories(response)
             } catch (error) {
                 console.log(error);
-                
+
             }
-        } 
+        }
         getCategories()
-    },[])
+    }, [])
+
+    const HandleGetNameCategories = (data: string) => {
+        setNameCategories(data);
+    };
+    useEffect(() => {
+        const getCategoriesByName = async (dataName: string) => {
+            try {
+                const response = await getThirdPartyAPI.HandleGetThirdPartyAPI(
+                    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${dataName}`,
+                );
+                setCookingRecipes(response);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getCategoriesByName(nameCategories);
+    }, [nameCategories]);
+
+    const HandleDetailCookingRecipes = (item : any) => {
+        navigation.navigate('DetailCookingRecipes', {data:item})
+    }
 
     return (
         <ContainerComponent>
@@ -68,9 +91,9 @@ const HomeScreen = ({ navigation, route }: any) => {
                         color={COLORS.TEAL_GREEN}
                         size={24}
                         styles={{ fontFamily: FONTFAMILY.montserrat_bold }} />
-                    <View style={{padding: 10, borderColor: COLORS.TEAL_GREEN, borderRadius: 16, borderWidth: 1}}>
+                    <View style={{ padding: 10, borderColor: COLORS.TEAL_GREEN, borderRadius: 16, borderWidth: 1 }}>
                         <TouchableOpacity onPress={() => { navigation.navigate('Tìm Kiếm') }}>
-                            <SearchNormal1 color={COLORS.HEX_LIGHT_GREY} size={25}/>
+                            <SearchNormal1 color={COLORS.HEX_LIGHT_GREY} size={25} />
                         </TouchableOpacity>
                     </View>
                 </RowComponent>
@@ -78,11 +101,28 @@ const HomeScreen = ({ navigation, route }: any) => {
             <SectionComponent>
                 <RowComponent styles={{ alignItems: 'center' }}>
                     <Image source={IMAGES.Categories} style={{ marginRight: 5 }} />
-                    <TextComponent text='Danh mục' size={16} color={COLORS.BLACK} styles={{ fontFamily: FONTFAMILY.montserrat_medium }} />
+                    <TextComponent text='Categories' size={16} color={COLORS.BLACK} styles={{ fontFamily: FONTFAMILY.montserrat_medium }} />
                 </RowComponent>
             </SectionComponent>
             <SectionComponent>
-                <CategoriesList dataCategories={categories}/>
+                <CategoriesList dataCategories={categories.categories} onDataCategories={HandleGetNameCategories} />
+            </SectionComponent>
+            <SectionComponent>
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{paddingBottom: 999}}
+                    numColumns={2}
+                    columnWrapperStyle={{ justifyContent: 'space-between' }} 
+                    data={cookingRecipes?.meals}
+                    keyExtractor={item => item.idMeal}
+                    renderItem={({ item }) => (
+                        <CardComponent
+                            onPress={() => HandleDetailCookingRecipes(item)}
+                            dataCookingRecipes={item}
+                            nameCate={nameCategories}
+                        />
+                    )}
+                />
             </SectionComponent>
         </ContainerComponent>
     )

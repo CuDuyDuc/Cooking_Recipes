@@ -7,6 +7,7 @@ import SectionComponent from './SectionComponent';
 import SpaceComponent from './SpaceComponent';
 import TextComponent from './TextComponent';
 import CategoriesList from './CategoriesList ';
+import CardComponent from './CardComponent ';
 export {
     ButtonComponent,
     ContainerComponent,
@@ -17,4 +18,5 @@ export {
     SpaceComponent,
     TextComponent,
     CategoriesList,
+    CardComponent,
 }

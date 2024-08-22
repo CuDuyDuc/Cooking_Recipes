@@ -7,6 +7,7 @@ import Verification from './auth/Verification';
 import ProFileScreen from './profile/ProfileScreen';
 import SearchScreen from './search/SearchScreen';
 import FavouriteScreen from './favourite/FavouriteScreen';
+import DetailCookingRecipes from './home/detail/DetailCookingRecipes';
 export {
     SplashScreen,
     LoginScreen,
@@ -17,4 +18,5 @@ export {
     ProFileScreen,
     SearchScreen,
     FavouriteScreen,
+    DetailCookingRecipes,
 }
