@@ -76,14 +76,14 @@ const Verification = ({ navigation, route }: any) => {
             console.log(res.data.code);
         } catch (error) {
             setIsLoading(false);
-            console.log(`Không thể gửi mã xác thực ${error}`);
+            console.log(`Unable to send authentication code ${error}`);
         }
     };
 
     const handleVerification = async () => {
         if (limit > 0) {
             if (parseInt(newCode) !== parseInt(currentCode)) {
-                setErrorMessage('Mã không hợp lệ!');
+                setErrorMessage('Invalid code!');
             } else {
                 setErrorMessage('');
 
@@ -103,12 +103,12 @@ const Verification = ({ navigation, route }: any) => {
                     dispatch(addAuth(res.data));
                     await AsyncStorage.setItem('auth', JSON.stringify(res.data));
                 } catch (error) {
-                    setErrorMessage('Người dùng đã tồn tại!');
-                    console.log(`Không thể tạo người dùng mới ${error}`);
+                    setErrorMessage('User already exists!');
+                    console.log(`Unable to create new user ${error}`);
                 }
             }
         } else {
-            setErrorMessage('Mã xác minh hết thời gian chờ, vui lòng gửi lại mã mới!');
+            setErrorMessage('Verification code timed out, please resend a new code!');
         }
     };
 
@@ -120,12 +120,12 @@ const Verification = ({ navigation, route }: any) => {
                         onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
                 <TextComponent 
-                    text='Mã Xác Thực' 
+                    text='Authentication Code' 
                     title 
                     font={FONTFAMILY.montserrat_bold} 
                     color={COLORS.TEAL_GREEN}/>
                 <TextComponent
-                    text={`Chúng tôi đã gửi mã xác minh vào ${email.replace(/.{1,5}/, (m: any) => '*'.repeat(m.length))}: `}
+                    text={`We've sent you the verification code ${email.replace(/.{1,5}/, (m: any) => '*'.repeat(m.length))}: `}
                     styles={{ paddingBottom: 30 }}
                     color={COLORS.BLACK} />
             </SectionComponent>
@@ -217,7 +217,7 @@ const Verification = ({ navigation, route }: any) => {
                     <RowComponent>
                         <ButtonComponent
                             type="link"
-                            text="Gửi lại email xác thực"
+                            text="Resend the verification email"
                             onPress={handleResendVerification}
                         />
                     </RowComponent>

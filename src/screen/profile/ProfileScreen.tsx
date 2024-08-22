@@ -77,10 +77,10 @@ const ProFileScreen = ({ navigation }: any) => {
         <RowComponent justify='space-between'>
           <RowComponent justify='flex-start'>
             <TouchableOpacity style={{ paddingRight: 35 }}>
-              <Clock size={24} color={COLORS.ORANGE_PEEL} />
+              <Clock size={24} color={COLORS.TEAL_GREEN} />
             </TouchableOpacity>
             <TouchableOpacity style={{ flex: 0.9 }}>
-              <TextComponent text='Lịch sử' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
+              <TextComponent text='History' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
             </TouchableOpacity>
           </RowComponent>
           <TouchableOpacity>
@@ -92,10 +92,10 @@ const ProFileScreen = ({ navigation }: any) => {
         <RowComponent justify='space-between'>
           <RowComponent justify='flex-start'>
             <TouchableOpacity style={{ paddingRight: 35 }}>
-              <Location size={24} color={COLORS.ORANGE_PEEL} />
+              <Location size={24} color={COLORS.TEAL_GREEN} />
             </TouchableOpacity>
             <TouchableOpacity style={{ flex: 0.9 }}>
-              <TextComponent text='Địa chỉ' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
+              <TextComponent text='Address' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
             </TouchableOpacity>
           </RowComponent>
           <TouchableOpacity>
@@ -107,10 +107,10 @@ const ProFileScreen = ({ navigation }: any) => {
         <RowComponent justify='space-between'>
           <RowComponent justify='flex-start'>
             <TouchableOpacity style={{ paddingRight: 35 }}>
-              <MessageQuestion size={24} color={COLORS.ORANGE_PEEL} />
+              <MessageQuestion size={24} color={COLORS.TEAL_GREEN} />
             </TouchableOpacity>
             <TouchableOpacity style={{ flex: 0.9 }}>
-              <TextComponent text='Trợ giúp' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
+              <TextComponent text='Help' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
             </TouchableOpacity>
           </RowComponent>
           <TouchableOpacity>
@@ -122,10 +122,10 @@ const ProFileScreen = ({ navigation }: any) => {
         <RowComponent justify='space-between'>
           <RowComponent justify='flex-start'>
             <TouchableOpacity style={{ paddingRight: 35 }}>
-              <Setting2 size={24} color={COLORS.ORANGE_PEEL} />
+              <Setting2 size={24} color={COLORS.TEAL_GREEN} />
             </TouchableOpacity>
             <TouchableOpacity style={{ flex: 0.9 }}>
-              <TextComponent text='Cài đặt' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
+              <TextComponent text='Setting' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
             </TouchableOpacity>
           </RowComponent>
           <TouchableOpacity>
@@ -137,10 +137,10 @@ const ProFileScreen = ({ navigation }: any) => {
         <RowComponent justify='space-between'>
           <RowComponent justify='flex-start'>
             <TouchableOpacity style={{ paddingRight: 35 }}>
-              <LogoutCurve size={24} color={COLORS.ORANGE_PEEL} />
+              <LogoutCurve size={24} color={COLORS.TEAL_GREEN} />
             </TouchableOpacity>
             <TouchableOpacity style={{ flex: 0.9 }} onPress={handleLogout}>
-              <TextComponent text='Đăng xuất' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
+              <TextComponent text='Sign Out' font={FONTFAMILY.montserrat_bold} size={14} color={COLORS.HEX_LIGHT_GREY} />
             </TouchableOpacity>
           </RowComponent>
           <TouchableOpacity>
@@ -155,7 +155,7 @@ const ProFileScreen = ({ navigation }: any) => {
         style={{ marginHorizontal: 10, justifyContent: 'center' }}
       >
         <View style={{ borderRadius: 10, padding: 20, backgroundColor: COLORS.WHITE }}>
-          <TextComponent text='Bạn có chắc muốn đăng xuất không?' color={COLORS.ORANGE_PEEL} size={15} />
+          <TextComponent text='Are you sure you want to sign out?' color={COLORS.TEAL_GREEN} size={15} />
           <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 40 }}>
             <TouchableOpacity
               style={{
@@ -174,11 +174,11 @@ const ProFileScreen = ({ navigation }: any) => {
               style={{
                 marginRight: 10,
                 borderWidth: 1,
-                backgroundColor: COLORS.ORANGE_PEEL,
+                backgroundColor: COLORS.TEAL_GREEN,
                 padding: 8,
                 borderRadius: 10,
                 width: 70,
-                borderColor: COLORS.ORANGE_PEEL
+                borderColor: COLORS.TEAL_GREEN
               }}
               onPress={handleSignOut}>
               <TextComponent text='Yes' color={COLORS.WHITE} styles={{ textAlign: 'center' }} />

@@ -128,7 +128,7 @@ const LoginScreen = ({navigation}: any) => {
             <SectionComponent>
                 <SpaceComponent height={70}/>
                 <TextComponent
-                    text='Đăng Nhập'
+                    text='SIGN IN'
                     styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                     color={COLORS.TEAL_GREEN}
                     size={45} />
@@ -152,13 +152,13 @@ const LoginScreen = ({navigation}: any) => {
                     allowClear
                     affix={<Sms size={22} color={COLORS.HEX_LIGHT_GREY} />} />
                 <TextComponent
-                    text='Mật khẩu'
+                    text='Password'
                     styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                     color={COLORS.BLACK} />
                 <SpaceComponent height={5}/>
                 <InputComponent
                     value={password}
-                    placeholder='Mật khẩu'
+                    placeholder='Password'
                     onChange={val => setPassword(val)}
                     isPassword
                     affix={<Lock size={22} color={COLORS.HEX_LIGHT_GREY} />} />
@@ -171,10 +171,10 @@ const LoginScreen = ({navigation}: any) => {
                             thumbColor={isRemember ? COLORS.WHITE : COLORS.TEAL_GREEN}
                             value={isRemember}
                             onChange={() => setIsRemember(!isRemember)} />
-                        <TextComponent text='Ghi nhớ tài khoản' color={COLORS.BLACK} />
+                        <TextComponent text='Remember me' color={COLORS.BLACK} />
                     </RowComponent>
                     <ButtonComponent
-                        text='Quên mật khẩu?'
+                        text='Forgot password?'
                         onPress={() => navigation.navigate('ForgotPassWord')}
                         type="link" />
                 </RowComponent>
@@ -182,14 +182,14 @@ const LoginScreen = ({navigation}: any) => {
             <SectionComponent styles={{ marginTop: 20 }}>
                 <ButtonComponent
                     disable={isDisable}
-                    text='ĐĂNG NHẬP'
+                    text='SIGN IN'
                     type='#129575'
                     onPress={handleLogin}
                 />
             </SectionComponent>
             <SectionComponent>
                 <TextComponent
-                    text='Đăng nhập với'
+                    text='Sign in with'
                     color={COLORS.HEX_LIGHT_GREY}
                     styles={{
                         textAlign: 'center',
@@ -220,8 +220,8 @@ const LoginScreen = ({navigation}: any) => {
             <SectionComponent>
                 <SpaceComponent height={20}/>
                 <RowComponent justify='center'>
-                    <TextComponent text="Bạn chưa có tài khoản?  " color={COLORS.BLACK} />
-                    <ButtonComponent type='link' text='Đăng ký' onPress={() => {
+                    <TextComponent text="Don't have an account yet?  " color={COLORS.BLACK} />
+                    <ButtonComponent type='link' text='Register' onPress={() => {
                         navigation.navigate('SignUpScreen')
                     }} />
                 </RowComponent>

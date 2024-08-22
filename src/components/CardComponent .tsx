@@ -8,7 +8,7 @@ import { FONTFAMILY } from '../../assets/fonts';
 
 interface Props {
     dataCookingRecipes: any,
-    nameCate: string,
+    nameCate?: string,
     styles?: StyleProp<ViewStyle>,
     onPress?: () => void
 }
@@ -38,7 +38,7 @@ const CardComponent = (props: Props) => {
                 />
             </View>
             <TextComponent
-                text={nameCate}
+                text={nameCate??dataCookingRecipes?.strCategory}
                 color= {COLORS.TEAL_GREEN}
                 font= {FONTFAMILY.montserrat_bold}
                 size={16}

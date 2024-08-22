@@ -53,9 +53,9 @@ const SignUpScreen = ({ navigation }: any) => {
         switch (key) {
             case 'email':
                 if (!values.email) {
-                    message = `Vui lòng nhập Email!`;
+                    message = `Please enter Email!`;
                 } else if (!Validate.email(values.email)) {
-                    message = 'Email không hợp lệ!';
+                    message = 'Invalid email!';
                 } else {
                     message = '';
                 }
@@ -63,14 +63,14 @@ const SignUpScreen = ({ navigation }: any) => {
                 break;
 
             case 'password':
-                message = !values.password ? `Vui lòng nhập Password` : '';
+                message = !values.password ? `Please enter Password!` : '';
                 break;
 
             case 'confirmPass':
                 if (!values.confirmPass) {
-                    message = `Vui lòng nhập xác nhận mật khẩu!`;
+                    message = `Please enter password confirmation!`;
                 } else if (values.confirmPass !== values.password) {
-                    message = 'Mật khẩu không khớp!';
+                    message = 'Passwords do not match!';
                 } else {
                     message = '';
                 }
@@ -111,12 +111,12 @@ const SignUpScreen = ({ navigation }: any) => {
                 <SectionComponent>
                     <SpaceComponent height={70} />
                     <TextComponent
-                        text='Đăng Ký'
+                        text='Register'
                         styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                         color={COLORS.TEAL_GREEN}
                         size={45} />
                     <TextComponent
-                        text='Bạn hãy thiết lập tài khoản của mình, sẽ không mất nhiều thời gian.'
+                        text="Set up your account, it won't take long."
                         size={18}
                         styles={{ fontFamily: FONTFAMILY.montserrat_regular }}
                         color={COLORS.BLACK} />
@@ -124,13 +124,13 @@ const SignUpScreen = ({ navigation }: any) => {
                 <SpaceComponent height={40} />
                 <SectionComponent>
                     <TextComponent
-                        text='Họ tên'
+                        text='Full name'
                         styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                         color={COLORS.BLACK} />
                     <SpaceComponent height={5} />
                     <InputComponent
                         value={values.username}
-                        placeholder='Họ tên'
+                        placeholder='Full name'
                         onChange={val => handleChangeValue('username', val)}
                         allowClear
                         affix={<User size={22} color={COLORS.HEX_LIGHT_GREY} />} />
@@ -147,25 +147,25 @@ const SignUpScreen = ({ navigation }: any) => {
                         affix={<Sms size={22} color={COLORS.HEX_LIGHT_GREY} />}
                         onEnd={() => formValidator('email')} />
                     <TextComponent
-                        text='Mật khẩu'
+                        text='Password'
                         styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                         color={COLORS.BLACK} />
                     <SpaceComponent height={5} />
                     <InputComponent
                         value={values.password}
-                        placeholder='Mật khẩu'
+                        placeholder='Password'
                         onChange={val => handleChangeValue('password', val)}
                         isPassword
                         affix={<Lock size={22} color={COLORS.HEX_LIGHT_GREY} />}
                         onEnd={() => formValidator('password')} />
                     <TextComponent
-                        text='Xác nhận mật khẩu'
+                        text='Confirm password'
                         styles={{ fontFamily: FONTFAMILY.montserrat_bold }}
                         color={COLORS.BLACK} />
                     <SpaceComponent height={5} />
                     <InputComponent
                         value={values.confirmPass}
-                        placeholder='Xác nhận mật khẩu'
+                        placeholder='Confirm password'
                         onChange={val => handleChangeValue('confirmPass', val)}
                         isPassword
                         affix={<Lock size={22} color={COLORS.HEX_LIGHT_GREY} />}
@@ -187,15 +187,15 @@ const SignUpScreen = ({ navigation }: any) => {
                 )}
                 <SectionComponent styles={{ marginTop: 20 }}>
                     <ButtonComponent
-                        text='ĐĂNG KÝ'
+                        text='REGISTER'
                         type='#129575'
                         onPress={handleRegister}
                         disable={isDisable} />
                 </SectionComponent>
                 <SectionComponent>
                     <RowComponent justify='center'>
-                        <TextComponent text="Bạn đã có tài khoản?  " color={COLORS.BLACK} />
-                        <ButtonComponent type='link' text='Đăng nhập' onPress={() => {
+                        <TextComponent text="Already have an account?  " color={COLORS.BLACK} />
+                        <ButtonComponent type='link' text='Login' onPress={() => {
                             navigation.navigate('LoginScreen')
                         }} />
                     </RowComponent>

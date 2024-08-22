@@ -27,11 +27,11 @@ const ForgotPassWord = ({ navigation }: any) => {
         try {
             const res: any = await authenticationAPI.HandleAuthentication(api, {email}, 'post');
             console.log(res);
-            Alert.alert('Gửi Mật Khẩu Cho Bạn: ','Chúng tôi đã gửi đến email của bạn bao gồm mật khẩu mới!');
+            Alert.alert('Send Password to You: ','We have sent your email including the new password!');
             setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
-            console.log(`Không thể tạo mật khẩu mới api quên mật khẩu, ${error}`);
+            console.log(`Unable to create new password forgot password api, ${error}`);
         }
     }
 
@@ -45,8 +45,8 @@ const ForgotPassWord = ({ navigation }: any) => {
                 <SectionComponent>
                         <Image source={IMAGES.ForgotPass} style={{ width: '100%', height: 270, marginTop: 25 }} />
                     </SectionComponent>
-                <TextComponent text='Resset Mật Khẩu' title font={FONTFAMILY.montserrat_bold} color={COLORS.TEAL_GREEN} />
-                <TextComponent text='Để đặt lại mật khẩu, bạn cần có email có thể được xác thực.' styles={{ paddingBottom: 30 }} color={COLORS.BLACK} />
+                <TextComponent text='Resset Password' title font={FONTFAMILY.montserrat_bold} color={COLORS.TEAL_GREEN} />
+                <TextComponent text='To reset your password, you need an email that can be authenticated.' styles={{ paddingBottom: 30 }} color={COLORS.BLACK} />
                 <InputComponent
                     value={email}
                     onChange={val => setEmail(val)}
@@ -56,7 +56,7 @@ const ForgotPassWord = ({ navigation }: any) => {
             </SectionComponent>
             <SectionComponent styles={{ alignItems: 'center' }}>
                 <ButtonComponent
-                    text='Gửi'
+                    text='SEND'
                     type='#129575'
                     styles={{ width: '80%' }}
                     disable={isDisable}

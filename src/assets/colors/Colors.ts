@@ -8,6 +8,7 @@ const COLORS = {
     HEX_LIGHT: '#141921',
     LIGHT: '#d9e3f0',
     ORANGE_PEEL: '#FF9C00',
+    BLUE_PRIMARY: '#007CAB',
 }
 
 export default COLORS;
