@@ -1,3 +1,3 @@
 export const appInfo = {
-    BASE_URL: 'http://192.168.1.14:3000',
+    BASE_URL: 'https://server-cooking-recipes.vercel.app',
 };
