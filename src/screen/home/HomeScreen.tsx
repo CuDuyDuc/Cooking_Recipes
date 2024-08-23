@@ -39,15 +39,18 @@ const HomeScreen = ({ navigation }: any) => {
                     `https://www.themealdb.com/api/json/v1/1/filter.php?c=${dataName}`,
                 );
                 setCookingRecipes(response);
+
             } catch (error) {
                 console.log(error);
             }
         };
-        getCategoriesByName(nameCategories);
-    }, [nameCategories]);
+        if (nameCategories) {
+            getCategoriesByName(nameCategories);
+        }
+    }, [user, nameCategories]);
 
-    const HandleDetailCookingRecipes = (item : any) => {
-        navigation.navigate('DetailCookingRecipes', {data:item})
+    const HandleDetailCookingRecipes = (item: any) => {
+        navigation.navigate('DetailCookingRecipes', { data: item })
     }
 
     return (
@@ -110,9 +113,9 @@ const HomeScreen = ({ navigation }: any) => {
             <SectionComponent>
                 <FlatList
                     showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{paddingBottom: 999}}
+                    contentContainerStyle={{ paddingBottom: 999 }}
                     numColumns={2}
-                    columnWrapperStyle={{ justifyContent: 'space-between' }} 
+                    columnWrapperStyle={{ justifyContent: 'space-between' }}
                     data={cookingRecipes?.meals}
                     keyExtractor={item => item.idMeal}
                     renderItem={({ item }) => (

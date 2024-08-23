@@ -9,6 +9,7 @@ import { FONTFAMILY } from '../../../assets/fonts';
 import COLORS from '../../assets/colors/Colors';
 import { authSelector, removeAuth } from '../../redux/reducers/authReducer';
 import { ContainerComponent, RowComponent, SectionComponent, TextComponent } from '../../components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProFileScreen = ({ navigation }: any) => {
   const user = useSelector(authSelector);
@@ -24,6 +25,7 @@ const ProFileScreen = ({ navigation }: any) => {
     await GoogleSignin.signOut();
     await LoginManager.logOut();
     dispatch(removeAuth({}));
+    await AsyncStorage.removeItem("auth");
 
     // Ẩn modal sau khi đăng xuất thành công
     setModalVisible(false);
